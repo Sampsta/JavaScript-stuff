@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+	<script>
+		function squareNumber(n1)
+		{
+			return n1*n1;
+		}
+		function sumNumbers(n1, n2, n3)
+		{
+			var n1 = Number(n1);
+			var n2 = Number(n2);
+			var n3 = Number(n3);
+			return (n1 + n2 + n3);
+		}
+		function createPerson(name, age, occupation)
+		{
+			var p1 = {name:"dan",age:25,occupation:"..."};
+			document.getElementById("personDetails").innerHTML = p1;
+			return p1;
+		}
+		//var myPerson = createPerson("dan", 25, "Consultant");
+		//document.getElementById("personDetails").innerHTML = p1;
+	</script>
+		<p id="stringTest"></p>
+		<p id="stringTestNumbers"></p>
+	<script>
+		var stringChanging = "he said my name is dan!";
+		var stringAlter = stringChanging.toUpperCase();
+		var stringNumbers = "1" + 5;
+		document.getElementById("stringTest").innerHTML = stringAlter;
+		document.getElementById("stringTestNumbers").innerHTML = stringNumbers;
+		
+	</script>
+	</br>
+	<form name='entryForm'>
+		<input type=text name="num1">
+		<input type=text name="num2">
+		<input type=text name="num3">
+		<input type=button value="sum 3 numbers" onclick='document.write("the sum of the three numbers is " 
+			+ sumNumbers(entryForm.num1.value, entryForm.num2.value, entryForm.num3.value));'>
+	</form>
+	</br>
+		<form name ='squareIt'>
+		<input type=text name="squareNum">
+		<input type=button value="Square Number" onclick='document.write("the square of the number is " 
+			+ squareNumber(squareIt.squareNum.value));'>
+		</form>
+	</br>
+	<p id="personDetails"></p>
+	<script>
+		var myPerson = createPerson("dan", 25, "Consultant");
+		document.getElementById("personDetails").innerHTML = myPerson;
+	</script>
+
+	
+			<form name ='increaseAge'>
+				<input type=text name="personsAge">
+				<input type=button value="Increase Age" onclick='document.write("the person is " 
+					+ createPerson(myPerson));'>
+			</form>
+			
+	<p id="arrayTest"></p>
+	<script>/*Create an array with 3 strings and output them all.
+			Add another string with JS and output them.
+			Remove the last string from the array with JS and then output them. */
+		var myArray = ["Hi", "Ben", "javascript", "is", "trash"];
+		function addToArray(myArray){
+			myArray[myArray.length] = "jokes";
+			return myArray;
+		}
+		var appenededArray = addToArray(myArray);
+		
+		function deleteFromArray(appenededArray){
+			appenededArray.splice(5,5);
+			return appenededArray;
+		}
+		var deleteLast = deleteFromArray(appenededArray);
+		
+		document.getElementById("arrayTest").innerHTML = deleteLast;
+	</script>
+	
+	<p id ="fizzBuzz"></p>
+	<script>
+		function fizzBuzz()
+		{
+			for(var i =1; i <=100; i++){
+				if(i % 15 == 0)
+					console.log("fizzbuzz");
+				else if(i % 3 == 0)
+					console.log("fizz");
+				else if(i % 5 == 0)
+					console.log("buzz");
+				else
+					console.log(i);
+			}
+		}
+		var runFizzBuzz = fizzBuzz();
+		document.getElementById("fizzBuzz").innerHTML = runFizzBuzz;
+	</script>
+	
+	<script>
+		function largeNumberThing()
+		{
+			for(var largeNumber = 664; largeNumber <= 666; largeNumber++){
+				if(largeNumber % 3 == 0){
+					console.log(largeNumber);
+					return;
+				}else if(largeNumber % 3 != 0){
+					largeNumber++;}
+			}
+		}
+		var runlargeNumberThing = largeNumberThing();
+	</script>
+	
+	</br>
+	
+	<script>
+		var newTag = document.createElement("P");
+		var newText = document.createTextNode("we did it fam");
+		var changeText = document.createTextNode("we changed it fam");
+		function addPTag(){
+			newTag.appendChild(newText);
+			document.body.appendChild(newTag);
+		}
+		function changeTag(){
+			newTag.removeChild(newText)
+			newTag.appendChild(changeText);
+			document.body.appendChild(newTag);
+		}
+		
+		function removePTag(){
+			document.body.removeChild(newTag);
+		}
+	</script>
+	<form>
+		<input type=button value="AddTag" onclick="addPTag()">
+		<input type=button value="ChangeText" onclick="changeTag()">
+		<input type=button value="RemoveTag" onclick="removePTag()">
+	</form>
+</body>
+
+
+</html>
