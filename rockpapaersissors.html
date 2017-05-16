@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+</head>
+
+<body>
+
+
+<h1 style="text-align:center;">Rock-Paper-Sissors game</h1>
+
+<form style="text-align:center;" id="pageForm" name="pageForm"	>
+<input type=radio name="game" value=0 id="rock">Rock
+<input type=radio name="game" value=1  id="paper">Paper
+<input type=radio name="game" value=2  id="sissors">Sissors
+</br>
+
+</br> <input type="button" onclick="go(); battle(x,aiMove); countClicks()"; value="Battle Button" />
+<!--</br> <input type="button" onclick="randomiser()"; value="Ai Choice" />
+<input type=button value="Click" onclick="countClicks()">
+<!--</br> <input type="button" onclick="go()"; value="go" />-->
+</br> <p>The total number of games played is: <a id="noOfClicks"></a></p>
+</br> <p>Computer Wins: <a id="noOfCompWins"></a></p>
+</br> <p>Human Wins: <a id="noOfHumanWins"></a></p>
+</br> <p>Ties:<a id="noOfTies"></a></p>
+	<script>
+		//var playerChoice = document.getElementByName("game").value
+		
+		var playerChoice = {Rock: 0, Paper:1 , Sissors:2}
+		var results = {
+						Rock: 	["Draw", "Loose", "Win"],
+						Paper:	["Draw", "Loose", "Win"],
+						Sissors:["Draw", "Loose", "Win"],
+					}
+		var aiChoice = [ "Rock" , "Paper", "Sissors"] 
+		var aiWin = 0
+		var playerWin = 0
+		var tie = 0
+		var rockNo = 0
+		var paperNo = 0
+		var sissorsNo = 0
+		var x =0
+		var aiMove = 0
+		var val = -1
+		var words
+		/*do {
+		
+		
+		
+		
+		gameOver = false;
+		}
+		while(var gameOver);*/
+		
+		function go(){
+		var randomNumber= Math.floor(Math.random()*3)
+		x = document.pageForm.game.value
+		aiMove = randomNumber
+	//	console.log(x+ " is what you picked")
+	//	console.log(aiMove +" is what AI has picked")
+		return x
+
+		}
+		
+		function battle(val, aim){
+		val = parseInt(val)
+		var Key = parseInt(aim)
+		console.log(Key +", "+ val)
+		var aiChoices = aiChoice[Math.floor(Math.random()* aiChoice.length)]
+	//	console.log(aiChoices)
+		//var a = results[x][Key]
+		//window.alert(a)
+		words = results[aiChoices][Key]
+	//	console.log(results[aiChoices][Key])
+		console.log(words)
+	
+  }
+		
+		var clicks = 0;
+		function countClicks(){
+			clicks +=1;
+			if(words.includes("Draw"))
+			{
+				tie++;
+			}else if(words.includes("Loose"))
+			{
+				aiWin++;
+			}else if(words.includes("Win"))
+			{
+				playerWin++;
+			}	
+			
+			
+			document.getElementById("noOfClicks").innerHTML = clicks;
+			document.getElementById("noOfCompWins").innerHTML = aiWin + " " + Math.round((aiWin/clicks)*100)+"%";
+			document.getElementById("noOfHumanWins").innerHTML = playerWin + " " + Math.round((playerWin/clicks)*100)+"%";
+			document.getElementById("noOfTies").innerHTML = tie + " " + Math.round((tie/clicks)*100)+"%";
+			
+		}
+		
+		/*
+		function randomiser(){
+			var randomNumber= Math.floor(Math.random()*4)
+			console.log(randomNumber)
+			aiMove = randomNumber
+			
+			return randomNumber
+			}
+		*/
+
+
+	</script>
+</form>
+</body>
+
+</html>
