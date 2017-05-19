@@ -27,7 +27,8 @@
 					<p>enter faults:(lights, gears, oil, service, tyres)</p><input type="text" id="faultsForBill">
 					</br></br>
 					<input type="button" value="Calculate bill" onclick="calculateBill()">
-	
+			<p>admin use:</p><input type="text" id="switchInput">
+			<input type="button" value="Submit" onclick="heresASwitch()">
 	</form>
 	<div id ="display"></div>
 		<script>
@@ -96,7 +97,25 @@
 							alert("cost of repair is £200")
 						}
 				}
-				
+				function heresASwitch(){
+					var stringInput = document.getElementById("switchInput").value;
+						switch(stringInput){
+							case "add": 
+								insertToArrays();
+								break;
+							case "show":
+								show();
+								break;
+							case "checkout":
+								checkoutVehicle();
+								break;
+							case "calculate":
+								calculateBill();
+								break;
+							default:
+								alert("something went wrong");
+						}		
+				}
 				
 		</script>
 </body>
