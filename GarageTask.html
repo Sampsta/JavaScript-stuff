@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+	<form id="basicForm">
+		<h1>Enter vehicle details</h1>
+		<p>enter registration number, check in:</p><input type="text" id="regInput">
+		</br>
+		<p>enter model of car:</p><input type="text" id="model">
+		</br>
+		<p>enter faults:(lights, gears, oil, service, tyres)</p><input type="text" id="faults">
+		</br></br>
+		<input type="button" value="check In" onclick="insertToArrays()">
+		<input type="button" value="Add car to garage" onclick="insertToArrays()">
+			</br></br>
+			<p>enter registration to check out:</p><input type="text" id="removeInput">
+			</br></br>
+			<input type="button" value="check Out" onclick="checkoutVehicle()">
+			</br></br>
+				<input type="button" value="Show all vehicles" onclick="show()">
+				</br></br>
+					<p>enter registration to get bill:</p><input type="text" id="billInput">
+					</br>
+					<p>enter model of car:</p><input type="text" id="modelForBill">
+					</br>
+					<p>enter faults:(lights, gears, oil, service, tyres)</p><input type="text" id="faultsForBill">
+					</br></br>
+					<input type="button" value="Calculate bill" onclick="calculateBill()">
+			<p>admin use:</p><input type="text" id="switchInput">
+			<input type="button" value="Submit" onclick="heresASwitch()">
+	</form>
+	<div id ="display"></div>
+		<script>
+			var regId = [];
+			var modelType = [];
+			var vehicleFault = [];
+			var registrationInput = document.getElementById("regInput");
+			var modelInput = document.getElementById("model");
+			var faultInput = document.getElementById("faults");
+			
+			
+			var messagebox = document.getElementById("display");
+			
+				function insertToArrays(){
+					regId.push(registrationInput.value);
+					modelType.push(modelInput.value);
+					vehicleFault.push(faultInput.value);
+					
+					clear();
+				}
+				
+				function clear(){
+					registrationInput.value = "";
+					modelInput.value = "";
+					faultInput.value = "";
+					
+					/*messagebox.innerHTML = "";
+					
+					messagebox.innerHTML += "Registration: " + regId.join(", ") + "<br/>";
+					messagebox.innerHTML += "Model: " + modelType.join(", ") + "<br/>";
+					messagebox.innerHTML += "Fault: " + vehicleFault.join(", ") + "<br/>";*/
+				}
+				
+				function show(){
+					messagebox.innerHTML = "";
+					
+					messagebox.innerHTML += "Registration: " + regId.join(", ") + "<br/>";
+					messagebox.innerHTML += "Model: " + modelType.join(", ") + "<br/>";
+					messagebox.innerHTML += "Fault: " + vehicleFault.join(", ") + "<br/>";
+				}
+				
+				function checkoutVehicle(){
+					var regToRemove = document.getElementById("removeInput").value;
+						regId.splice(regToRemove, 1);
+						var spliceOver = regToRemove.selectedIndex;
+							modelType.splice(spliceOver, 1);
+							vehicleFault.splice(spliceOver, 1);
+				}
+				
+				function calculateBill(){
+					var regForBill = document.getElementById("removeInput").value;
+						console.log(regForBill);
+					var modelBill = document.getElementById("modelForBill").value;
+						console.log(modelBill);
+					var faultsBill = document.getElementById("faultsForBill").value;
+						console.log(faultsBill);
+						if(faultsBill == 'lights'){
+							alert("cost of repair is £100")
+						}else if(faultsBill == 'gears'){
+							alert("cost of repair is £150")
+						}else if(faultsBill == 'oil'){
+							alert("cost of repair is £50")
+						}else if(faultsBill == 'service'){
+							alert("cost of repair is £300")
+						}else if(faultsBill == 'tyres'){
+							alert("cost of repair is £200")
+						}
+				}
+				function heresASwitch(){
+					var stringInput = document.getElementById("switchInput").value;
+						switch(stringInput){
+							case "add": 
+								insertToArrays();
+								break;
+							case "show":
+								show();
+								break;
+							case "checkout":
+								checkoutVehicle();
+								break;
+							case "calculate":
+								calculateBill();
+								break;
+							default:
+								alert("something went wrong");
+						}		
+				}
+				
+		</script>
+</body>
+</html>
