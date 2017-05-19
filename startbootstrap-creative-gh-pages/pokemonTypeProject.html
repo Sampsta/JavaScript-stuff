@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+		
+		<p>Select first pokemon type:</p><select id='firstTypeEntry'>
+		</select>
+		
+		<button onclick="unhideThird()">Click to include a second type:</button>
+			<select id ='thirdTypeEntry'>
+			</select>
+		</br>
+		
+		<p>Select second pokemon type:</p><select id='secondTypeEntry'>
+		</select>
+		
+		<button onclick="unhideFourth()">Click to include a second type:</button>
+			<select id ='fourthTypeEntry'>
+			</select>
+
+		</br></br>
+		<button onclick="getTypeEffect2Types(); results2Types();">Compare type effectiveness 2 types</button>
+		</br></br>
+		<button id="buttonType3" onclick="getTypeEffect3Types(); results3Types();">Compare type effectiveness 3 types</button>
+		</br></br>
+		<button id="buttonType4" onclick="getTypeEffect4Types(); results4Types();">Compare type effectiveness 4 types</button>
+
+		<p> The first type selected is: <a id="textField1"></a></p>
+		<p> The second type selected is: <a id="textField2"></a></p>
+		<p id="hideMe1"> The third type selected is: <a id="textField4"></a></p>
+		<p id="hideMe2"> The fourth type selected is: <a id="textField5"></a></p>
+		<p> The result is: <a id="textField3"></a></p>
+		
+		</br>
+		
+		<script>
+			var pokeTypes = ["normal","fighting","flying","poison","ground",
+								"rock","bug","ghost","steel",
+								"fire","water","grass","electric",
+								"psychic","ice","dragon","dark","fairy"]
+			var calculate = {
+				normal: [1,1,1,1,1,0.5,1,0,0.5,1,1,1,1,1,1,1,1,1],
+				fighting: [2,1,0.5,0.5,1,2,0.5,0,2,1,1,1,1,0.5,2,1,2,0.5],
+				flying: [1,2,1,1,1,0.5,2,1,0.5,1,1,2,0.5,1,1,1,1,1],
+				poison: [1,1,1,0.5,0.5,0.5,1,0.5,0,1,1,2,1,1,1,1,1,2],
+				ground: [1,1,0,2,1,2,0.5,1,2,2,1,0.5,2,1,1,1,1,1],
+				rock: [1,0.5,2,1,0.5,1,2,1,0.5,2,1,1,1,1,2,1,1,1],
+				bug: [1,0.5,0.5,0.5,1,1,1,0.5,0.5,0.5,1,2,1,2,1,1,2,0.5],
+				ghost: [0,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,0.5,1],
+				steel: [1,1,1,1,12,1,1,0.5,0.5,0.5,1,0.5,1,2,1,1,2],
+				fire: [1,1,1,1,1,0.5,2,1,2,0.5,0.5,2,1,1,2,0.5,1,1],
+				water: [1,1,1,1,2,2,1,1,1,2,0.5,0.5,1,1,1,0.5,1,1],
+				grass: [1,1,0.5,0.5,2,2,0.5,1,0.5,0.5,2,0.5,1,1,1,0.5,1,1],
+				electric: [1,1,2,1,0,1,1,1,1,1,2,0.5,0.5,1,1,0.5,1,1],
+				psychic: [1,2,1,2,1,1,1,1,0.5,1,1,1,1,0.5,1,1,0,1],
+				ice: [1,1,2,1,2,1,1,1,0.5,0.5,0.5,2,1,1,0.5,2,1,1],
+				dragon: [1,1,1,1,1,1,1,1,0.5,1,1,1,1,1,1,2,1,0],
+				dark: [1,0.5,1,1,1,1,1,2,1,1,1,1,1,2,1,1,0.5,0.5],                                               
+				fairy: [1,2,1,0.5,1,1,1,1,0.5,0.5,1,1,1,1,1,2,2,1],			
+			}
+			
+			var type1 = document.getElementById("firstTypeEntry");
+			var type2 = document.getElementById("secondTypeEntry");
+			var type3 = document.getElementById("thirdTypeEntry");
+			var type4 = document.getElementById("fourthTypeEntry");
+			var thirdTypeDisplay = document.getElementById("hideMe1").style.visibility = "hidden";
+			var fourthTypeDisplay = document.getElementById("hideMe2").style.visibility = "hidden";
+			for(var i =0; i < pokeTypes.length; i++){
+				var opt1 = document.createElement('option');
+				opt1.innerHTML = pokeTypes[i];
+				opt1.value = pokeTypes[i];
+				type1.appendChild(opt1);
+				var opt2 = document.createElement('option');
+				opt2.innerHTML = pokeTypes[i];
+				opt2.value = pokeTypes[i];
+				type2.appendChild(opt2);
+				var opt3 = document.createElement('option');
+				opt3.innerHTML = pokeTypes[i];
+				opt3.value = pokeTypes[i];
+				type3.appendChild(opt3);
+				var opt4 = document.createElement('option');
+				opt4.innerHTML = pokeTypes[i];
+				opt4.value = pokeTypes[i];
+				type4.appendChild(opt4);
+				}
+				
+			var type3 = document.getElementById("thirdTypeEntry").style.visibility = "hidden";
+			var type4 = document.getElementById("fourthTypeEntry").style.visibility = "hidden";
+			
+				function getTypeEffect2Types(){
+					var getType1 = document.getElementById("firstTypeEntry").value;
+					//console.log(getType1)
+					var getType2 = document.getElementById("secondTypeEntry").value;
+					//console.log(getType2)
+						document.getElementById("textField1").innerHTML = getType1;
+						document.getElementById("textField2").innerHTML = getType2;
+				}
+				
+				function getTypeEffect3Types(){
+					var getType1 = document.getElementById("firstTypeEntry").value;
+					//console.log(getType1)
+					var getType2 = document.getElementById("secondTypeEntry").value;
+					//console.log(getType2)
+					var getType3 = document.getElementById("thirdTypeEntry").value;
+					//console.log(getType3)
+					var getType4 = document.getElementById("fourthTypeEntry").value;
+					//console.log(getType4)
+						document.getElementById("textField1").innerHTML = getType1;
+						document.getElementById("textField2").innerHTML = getType2;
+						if(document.getElementById("thirdTypeEntry").visibility = "hidden"){
+							document.getElementById("textField4").innerHTML = getType3;
+							}else{
+							document.getElementById("textField5").innerHTML = getType4;
+							}
+				}
+				
+				function getTypeEffect4Types(){
+					var getType1 = document.getElementById("firstTypeEntry").value;
+					//console.log(getType1)
+					var getType2 = document.getElementById("secondTypeEntry").value;
+					//console.log(getType2)
+					var getType3 = document.getElementById("thirdTypeEntry").value;
+					//console.log(getType3)
+					var getType4 = document.getElementById("fourthTypeEntry").value;
+					//console.log(getType4)
+						document.getElementById("textField1").innerHTML = getType1;
+						document.getElementById("textField2").innerHTML = getType2;
+						document.getElementById("textField4").innerHTML = getType3;
+						document.getElementById("textField5").innerHTML = getType4;
+				}
+				
+				function results2Types(){
+						var x = document.getElementById("firstTypeEntry").value
+						console.log(x)
+						var key = document.getElementById("secondTypeEntry").selectedIndex
+						console.log(key)
+						var effect = calculate[x][key]
+						console.log(effect)
+						document.getElementById("textField3").innerHTML = (effect + "x effectiveness")
+				}
+				
+				//currently not working
+				function results3Types(){
+						var x = document.getElementById("firstTypeEntry").value
+						console.log(x)
+						var key = document.getElementById("secondTypeEntry").selectedIndex
+						console.log(key)
+						var effect = calculate[x][key]
+						console.log(effect)
+						document.getElementById("textField3").innerHTML = (effect + "x effectiveness")
+				}
+				
+				//needs editing
+				function results4Types(){
+						var x = document.getElementById("firstTypeEntry").value
+						console.log(x)
+						var key1 = document.getElementById("secondTypeEntry").selectedIndex
+						console.log(key1)
+						var effect1 = calculate[x][key1]
+						console.log(effect1)
+						var y = document.getElementById("thirdTypeEntry").value
+						console.log(y)
+						var key2 = document.getElementById("fourthTypeEntry").selectedIndex
+						console.log(key2)
+						var effect2 = calculate[y][key2]
+						console.log(effect2)
+						document.getElementById("textField3").innerHTML = (effect1 + "x effectiveness" + " & "  + effect2 + "x effectiveness")
+				}
+				
+				function unhideThird(){
+					var type3 = document.getElementById("thirdTypeEntry").style.visibility = "visible";
+					var thirdTypeDisplay = document.getElementById("hideMe1").style.visibility = "visible";
+				}
+				
+				function unhideFourth(){
+					var type4 = document.getElementById("fourthTypeEntry").style.visibility = "visible";
+					var fourthTypeDisplay = document.getElementById("hideMe2").style.visibility = "visible";
+				}
+
+				
+			/*function getTypeEffect(){
+				switch(document.getElementById("firstTypeEntry").selectedIndex){
+					case 0:
+						alert("type normal, no double effectiveness, weak to: ghost 0x, rock/steel 0.5x");
+						break;
+					case 1:
+						alert("type fighting, strong against: normal/rock/steel/ice/dark 2x, weak to: ghost 0x, flying/poison/bug/psychic/fairy 0.5x");
+						break;
+					case 2:
+						alert("type flying", strong against: fighting/bug/grass 2x, weak to: rock/steel/electric 0.5x);
+						break;
+					case 3:
+						alert("type poison", strong against: grass/fairy 2x, weak to: steel 0x, poison/rock/ground/ghost 0.5x);
+						break;
+					case 4:
+						alert("type ground", strong against: poison/rock/steel/fire/electric 2x, weak to: flying 0x, bug/grass 0.5x);
+						break;
+					case 5:
+						alert("type rock", strong against: flying/bug/fire/ice 2x, weak to: fighting/ground/steel 0.5x);
+						break;
+					case 6:
+						alert("type bug", strong against: grass/psychic/dark 2x, weak to: fighting/flying/poison/ghost/steel/fire/fairy 0.5x);
+						break;
+					case 7:
+						alert("type ghost", strong against: ghost/psychic 2x, weak to: normal 0x, dark 0.5x);
+						break;
+					case 8:
+						alert("type steel", strong against: rock/ice/fairy 2x, weak to: steel/fire/water/electric 0.5x);
+						break;
+					case 9:
+						alert("type fire", strong against: bug/steel/grass/ice 2x, weak to: rock/fire/water/dragon 0.5x);
+						break;
+					case 10:
+						alert("type water", strong against: ground/rock/fire 2x, weak to: water/grass/dragon 0.5x);
+						break;
+					case 11:
+						alert("type grass", strong against: ground/rock/water 2x, weak to: flying/poison/bug/steel/fire/grass/dragon 0.5x);
+						break;
+					case 12:
+						alert("type electric", strong against: flying/water 2x, weak to: ground 0x, grass/electric/dragon 0.5x);
+						break;
+					case 13:
+						alert("type psychic", strong against: fighting/poison 2x, weak to: dark 0x, steel/psychic 0.5x);
+						break;
+					case 14:
+						alert("type ice", strong against: flying/ground/grass/dragon 2x, weak to: steel/fire/water/ice 0.5x);
+						break;
+					case 15:
+						alert("type dragon", strong against: dragon 2x, weak to: fairy 0x, steel 0.5x);
+						break;
+					case 16:
+						alert("type dark", strong against: ghost/psychic 2x, weak to: fighting/dark/fairy 0.5x);
+						break;
+					case 17:
+						alert("type fairy", strong against: fighting/dragon/dark 2x, weak to: poison/steel/fire 0.5x);
+						break;
+				}
+				//var getType2 = document.getElementById("secondTypeEntry").value;
+					//document.getElementById("test").innerHTML = (getType1 + " " + getType2);
+			}*/
+		</script>
+</body>
+
+</html>

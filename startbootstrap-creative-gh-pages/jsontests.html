@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+</head>
+<body>
+	
+	
+	<script>
+		var requestURL = 'https://github.com/womackx/JSONDataRepo/blob/master/example.json';
+		
+		var getJSON = function(requestURL) {
+		var request = newXMLHttpRequest();
+		request.open('GET', requestURL);
+		request.responseType = 'json';
+		request.onload = function(){
+			var superHeroes = request.response;
+		};
+		request.send();
+		};
+		
+		var insertText = document.createElement('h1');
+		insertText.textContent = jsonObj['squadName'];
+		document,getElementByTagName('head')[0].appendChild(insertText);
+	</script>
+</body>
+</html>
